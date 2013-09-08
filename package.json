@@ -1,8 +1,14 @@
-{ 
+{
   "name": "multifall",
   "version": "0.0.1",
-  "dependencies" :
-    { 
-      "socket.io" : "*" 
-    }
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.3.8",
+    "socket.io": "*",
+    "node-uuid": "*",
+    "ejs": "*"
+  }
 }
