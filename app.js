@@ -9,6 +9,20 @@ var express = require('express'),
     Player = require('./player.js'), 
     UUID = require('node-uuid')
 
+    io.configure('production', function(){
+      io.enable('browser client minification'); 
+      io.enable('browser client etag');          
+      io.enable('browser client gzip');        
+      io.set('log level', 1);                 
+      io.set('transports', [                 
+        'websocket'
+        , 'flashsocket'
+        , 'htmlfile'
+        , 'xhr-polling'
+        , 'jsonp-polling'
+        ]);
+    });
+
 server.listen(port);
 console.log('\t ::SERVER - Listening on port ' + port );
 
