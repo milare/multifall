@@ -65,7 +65,7 @@ function removePlayer(playerId) {
   }
 }
 
-function updateOrCreatePlayer(playerId, position) {
+function updateOrCreateOpponent(playerId, position) {
   var opponent = { id: playerId };
   var index = findPlayer(opponent);
   if(index == -1) {
@@ -85,15 +85,15 @@ function onConnected(player) {
   players.push(currentPlayer);
 }
 
-function onPlayerUpdated(data) {
-  updateOrCreatePlayer(data.playerId, data.position);
+function onOpponentUpdated(data) {
+  updateOrCreateOpponent(data.playerId, data.position);
 }
 
-function onPlayerExited(data) {
-  removePlayer(data.playerId);
+function onOpponentExited(data) {
+  removeOpponent(data.playerId);
 }
 
 socket.on('onConnected', onConnected);
-socket.on('onPlayerUpdated', onPlayerUpdated);
-socket.on('onPlayerExited', onPlayerExited);
+socket.on('onOpponentUpdated', onOpponentUpdated);
+socket.on('onOpponentExited', onOpponentExited);
 

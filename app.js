@@ -9,6 +9,7 @@ var express = require('express'),
     Player = require('./player.js'), 
     UUID = require('node-uuid')
 
+    // Socket.io production config
     io.configure('production', function(){
       io.enable('browser client minification'); 
       io.enable('browser client etag');          
@@ -28,7 +29,6 @@ console.log('\t ::SERVER - Listening on port ' + port );
 
 var players = [];
 
-
 // Socket server
 io.sockets.on('connection', function(client) {
 
@@ -44,14 +44,14 @@ io.sockets.on('connection', function(client) {
 
   client.on('update', function (data) {
     player = new Player(data.playerId);
-    client.broadcast.emit('onPlayerUpdated', { playerId: player.id, position: data.position });
+    client.broadcast.emit('onOpponentUpdated', { playerId: player.id, position: data.position });
   });
 
   // Client disconnected 
   client.on('disconnect', function () {
     // Remove player from players list
     var player = client.player;
-    client.broadcast.emit('onPlayerExited', { playerId: player.id });
+    client.broadcast.emit('onOpponentExited', { playerId: player.id });
     index = player.indexIn(players);
     players.splice(index, 1);
   });
